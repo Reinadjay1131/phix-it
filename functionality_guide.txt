@@ -1,0 +1,79 @@
+
+PHIX-IT: Functionality Guide
+=============================
+
+1. Overview
+-----------
+PHIX-IT is a platform designed to connect users needing electronic device repairs with local, verified repair providers. The system streamlines the process of getting repair quotes, allowing users to compare offers based on price, provider rating, and other factors. It also features an AI-powered onboarding process for new providers to help them set up their profiles quickly and effectively.
+
+
+2. User Roles
+-------------
+There are two primary types of users in the PHIX-IT system:
+
+*   **Consumer:** An individual who needs a device repaired. They submit a request and receive quotes from providers.
+*   **Provider:** A business or individual technician who offers repair services. They provide quotes for consumer requests.
+
+
+3. Consumer Workflow
+--------------------
+
+### 3.1. Authentication
+*   Users can either sign up for a new account or sign in to an existing one.
+*   The authentication form is tabbed, allowing users to easily select whether they are a "Consumer" or a "Provider".
+
+### 3.2. Submitting a Repair Request
+*   After logging in, the consumer is presented with a form to describe their repair needs.
+*   **Fields:**
+    *   **Device Model:** A dropdown list of common phone models (e.g., "iPhone 15 Pro", "Samsung Galaxy S24").
+    *   **Issue Type:** A dropdown list of common repair issues (e.g., "Cracked Screen", "Battery Replacement").
+    *   **Description:** A text area for the user to provide more specific details about the problem.
+*   Upon submission, the system uses the request details to find nearby providers and generate quotes.
+
+### 3.3. Viewing and Filtering Quotes
+*   Once a request is submitted, the consumer is taken to a dashboard where quotes from various providers will appear.
+*   **Real-time Updates:** The system simulates a real-time environment by having an additional, competitive quote arrive shortly after the initial batch. This new quote is highlighted to draw the user's attention.
+*   **Sorting:** Users can sort the quotes based on:
+    *   **Price:** From lowest to highest.
+    *   **Rating:** From highest to lowest provider rating.
+    *   **Proximity:** Based on the provider's location (currently simulated).
+*   **Filtering:** Users can further refine the quote list using filters:
+    *   **Repair Time:** Filter for repairs estimated to take under 3 hours, 3-6 hours, or within the same day.
+    *   **Specialty:** A multi-select dropdown allows users to filter for providers who specialize in specific areas (e.g., "Water Damage," "Apple Screen Repair"). This helps users find the most qualified expert for their specific issue.
+
+
+4. Provider Workflow
+--------------------
+
+### 4.1. Authentication
+*   Providers use the same authentication portal as consumers but must select the "I'm a Provider" tab.
+
+### 4.2. AI-Powered Onboarding
+*   New providers are guided through a two-step onboarding process designed to be fast and intelligent.
+*   **Step 1: Provide Basic Details**
+    *   The provider enters their business name, business type, and address (with live, AI-powered autocomplete suggestions).
+    *   They select their repair specialties from a predefined list and can add any professional certifications they hold.
+*   **Step 2: Review AI-Generated "Smart Profile"**
+    *   After submitting the basic details, the Gemini API analyzes the information.
+    *   **AI Deductions:** The system deduces and displays several key business insights, such as:
+        *   **Local Market Competition:** Low, Medium, or High.
+        *   **Skill Tier:** Generalist, Specialist, or Expert.
+        *   **Business Age Estimate:** A plausible estimate.
+        *   **Suggested Equipment:** A list of essential tools based on their specialties.
+        *   **Generated Profile Summary:** A professional, one-sentence summary for their public profile.
+    *   **Editable Settings:** The AI also suggests smart defaults for business settings, which the provider can review and adjust. A key adjustable setting is the **Service Radius**, which providers can change using an interactive slider to precisely define their service area.
+*   **Confirmation:** Once the provider is satisfied with their profile, they confirm it, and their account is created.
+
+### 4.3. Provider Dashboard
+*   After onboarding, providers are taken to their dashboard.
+*   This area is designed to be the central hub for managing incoming repair requests, viewing business analytics, and managing profile settings. (Note: In the current version, this section is a placeholder.)
+
+
+5. Core Technology (Gemini API)
+----------------------------------
+The application heavily utilizes the Google Gemini API for several key functions:
+
+*   **Mock Data Generation:** On startup, the app generates a list of realistic, fictional repair providers in a specific location (San Francisco) to populate the system for demo purposes.
+*   **Quote Generation:** When a consumer submits a request, the API generates varied and realistic quotes from the mock providers, taking into account factors like provider specialties and rating.
+*   **Geocoding Autocomplete:** The provider onboarding form uses the API to provide real-time, intelligent address suggestions as the provider types.
+*   **Smart Onboarding Analysis:** This is the core AI feature for providers. The API analyzes a new provider's inputs to deduce market insights, suggest equipment, and set smart defaults, significantly reducing the setup time and effort required.
